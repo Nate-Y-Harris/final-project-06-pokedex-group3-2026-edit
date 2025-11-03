@@ -1,6 +1,12 @@
 import requests
+import json
+import os
 
-def get_gen1_pokemon_data():
+def fetch_gen1_pokemon_from_api():
+
+    # This is the function that is fetching data directly from the PokeAPI, please only call this function if the JSON file doesn't exist or is having problems.
+    # Think of this function from here on out as a helper function to the main function that is essentially just grabbing the data.
+    # In short we will be using fetch_ from here on out as the helper function and get_ as the main function for retrieving data.
 
     pokemon_list = []
     base_url = "https://pokeapi.co/api/v2/pokemon"
@@ -41,7 +47,7 @@ def get_gen1_pokemon_data():
                 pokemon_data = {
                     'id': data['id'],
                     'name': data['name'].capitalize(), # capitalize the first letter
-                    'abilities': abilities,
+                    'abilities': abilities,  
                     'types': types,
                     'images': images,
                     'height': data['height'],
@@ -64,3 +70,28 @@ def get_gen1_pokemon_data():
             continue
     
     return pokemon_list
+
+def get_gen1_pokemon_data(json_filename="gen1output.json"):
+
+    # Different function for grabbing data locally first, if it doesn't exist yet, it will call the API instead
+
+    pokemon_data = None
+    
+    # Try to load from local JSON file first
+    if os.path.exists(json_filename):
+        try:
+            # open the file and load data
+            with open(json_filename, 'r') as f:
+                pokemon_data = json.load(f)
+                return pokemon_data
+            
+        # There is an error reading the JSON for whatever reason, it will call the PokeAPI as originally planned instead.    
+        except (json.JSONDecodeError, IOError) as e:
+            print(f"Error reading JSON file: {e}. Falling back to API...")
+            pokemon_data = fetch_gen1_pokemon_from_api()
+            return pokemon_data
+    else:
+        # JSON file doesn't exist, fetch from API
+        print("JSON file not found. Calling PokeAPI")
+        pokemon_data = fetch_gen1_pokemon_from_api()
+        return pokemon_data
