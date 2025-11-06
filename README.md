@@ -16,6 +16,13 @@ me to Machine learning, AR, cloud computing and game data to create an immersive
 experience. I once created a small project called Pokedex using Python, and in this project, I will
 be starting from where I left off but this time, with all these features.
 
+# Rquirements
+
+Please make sure you have Python installed
+pip install requests
+pip install flask
+
+
 # TOOLS 
 
 flask
