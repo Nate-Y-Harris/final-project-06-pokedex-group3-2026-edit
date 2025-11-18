@@ -85,8 +85,11 @@ def gen9():
 # This is the API route! It will return a JSON response from our call. 502 is bad gateway. set the timeout to 15 seconds but can change as needed
 @app.get("/api/pokemon/<string:name>")
 def searchPokemon(name):
-	pokemonData = get_pokemon(name)
-	return pokemonData
+    if name.isdigit():
+        name = str(int(name))  # changing integer to a string will remove leading zeroes    
+    pokemonData = get_pokemon(name)
+    return pokemonData
+
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", port=5000, debug=True)
