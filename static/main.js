@@ -52,9 +52,9 @@
 
 		const imgEl = card.querySelector('.card-image-container img');
 		let imageUrl = data.images?.official_artwork ||
-			data.images?.front_default ||
-			data.sprites?.other?.['official-artwork']?.front_default ||
-			data.sprites?.front_default ||
+			data.images?.front_shiny ||
+			data.sprites?.other?.['official-artwork']?.front_shiny ||
+			data.sprites?.font_shiny ||
 			`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
 		imgEl.src = imageUrl;
 		imgEl.alt = data.name || "Pokemon";
@@ -147,7 +147,7 @@
 		
 		// Image
 		const image = document.getElementById('modal-pokemon-image');
-		image.src = pokemon.sprites.other['official-artwork'].front_default || pokemon.sprites.front_default;
+		image.src = pokemon.sprites.other['official-artwork'].front_shiny|| pokemon.sprites.front_shiny;
 		image.alt = pokemon.name + ' artwork';
 		
 		// Types
