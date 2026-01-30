@@ -142,7 +142,7 @@
       data.sprites?.front_default ||
       `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${data.id}.png`;
 
-    imgEl.src = imageUrl;
+    imgEl.src =`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/${data.id}.png`;
     imgEl.alt = data.name || "Pokemon";
     imgEl.onerror = function () {
       this.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${data.id}.png`;
